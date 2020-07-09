@@ -112,7 +112,7 @@
 
 			[ "symlinkCompress", "node_modules/ansi_up/ansi_up.js", "htdocs/js/external/" ],
 			[ "symlinkCompress", "node_modules/ansi_up/ansi_up.js.map", "htdocs/js/external/" ],
-			[ "symlinkCompress", "node_modules/codemirror", "htdocs/codemirror" ],
+			[ "copyDir", "node_modules/codemirror", "htdocs/codemirror" ],
 			
 			[ "symlinkCompress", "node_modules/font-awesome/css/font-awesome.min.css", "htdocs/css/" ],
 			[ "symlinkCompress", "node_modules/font-awesome/css/font-awesome.css.map", "htdocs/css/" ],
