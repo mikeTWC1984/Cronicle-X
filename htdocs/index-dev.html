@@ -14,6 +14,40 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/materialdesignicons.min.css">
 	<!-- BUILD: COMBINE_STYLE_END -->
+
+
+	<link rel="stylesheet" href="codemirror/lib/codemirror.css">
+	<link rel="stylesheet" href="codemirror/theme/darcula.css">
+	<link rel="stylesheet" href="codemirror/theme/solarized.css">
+	<link rel="stylesheet" href="codemirror/theme/gruvbox-dark.css">
+	<link rel="stylesheet" href="codemirror/addon/scroll/simplescrollbars.css">
+	<script src="js/external/ansi_up.js"></script>
+	<script src="codemirror/lib/codemirror.js"></script>
+	<script src="codemirror/addon/scroll/simplescrollbars.js"></script>
+	<script src="codemirror/addon/edit/matchbrackets.js"></script>
+	<script src="codemirror/addon/selection/active-line.js"></script>
+	<script src="codemirror/mode/powershell/powershell.js"></script>
+	<script src="codemirror/mode/javascript/javascript.js"></script>
+	<script src="codemirror/mode/python/python.js"></script>
+	<script src="codemirror/mode/shell/shell.js"></script>
+	<script src="codemirror/mode/groovy/groovy.js"></script>
+	<style>
+		.CodeMirror {
+			border: 1px solid lightgray;
+			font-family: consolas, monaco, "Andale Mono", monospace;
+			font-style: normal;
+			font-weight: 400;
+			font-size: 1em;
+			width: 50em;
+			height: 36em;
+			resize: both;
+		}
+
+		.CodeMirror-gutter {
+			padding-right: 4px;
+			padding-left: 2px;
+		}
+	</style>
 </head>
 
 <body>
