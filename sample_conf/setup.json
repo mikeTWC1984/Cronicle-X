@@ -44,7 +44,7 @@
 				{ "id":"script", "type":"textarea", "rows":10, "title":"Script Source", "value": "#!/bin/sh\n\n# Enter your shell script code here" },
 				{ "id":"annotate", "type":"checkbox", "title":"Add Date/Time Stamps to Log", "value": 0 },
 				{ "id":"json", "type":"checkbox", "title":"Interpret JSON in Output", "value": 0 },
-				{"type":"select","id":"lang","title":"syntax","items":["shell","powershell","javascript","python","groovy"],"value":"shell"},
+				{"type":"select","id":"lang","title":"syntax","items":["shell","powershell","javascript","python","perl","groovy"],"value":"shell"},
 				{"type":"select","id":"theme","title":"theme","items":["default","gruvbox-dark","solarized light","solarized dark","darcula"],"value":"default"},
 				{"type":"checkbox","id":"tty","title":"use terminal emulator (script tool is required)","value":0}
 			]
@@ -148,7 +148,7 @@
 			},
 			[ "copyDir", "sample_conf", "conf", true ],
 			[ "copyFile", "htdocs/index-dev.html", "htdocs/index.html" ],
-			[ "copyDir", "node_modules/codemirror", "htdocs/codemirror" ],
+			[ "copyDir", "node_modules/codemirror", "htdocs/codemirror", true ],
 			{
 				"action": "bundleCompress",
 				"uglify": false,
