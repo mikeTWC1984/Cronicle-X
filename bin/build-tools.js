@@ -188,7 +188,7 @@ var copyDir = exports.copyDir = function copyDir( src_dir, dest_dir, exclusive, 
 	var src_spec = src_dir + '/*';
 	
 	// exclusive means skip if dest exists (do not replace)
-	if (exclusive && fileExistsSync(dest_dir)) return callback();
+	//if (exclusive && fileExistsSync(dest_dir)) return callback();
 	
 	mkdirp.sync( dest_dir );
 	
