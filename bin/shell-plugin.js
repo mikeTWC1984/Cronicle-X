@@ -29,7 +29,10 @@ stream.on('json', function(job) {
 	var kill_timer = null;
 	var stderr_buffer = '';
 	
-	var cstream = new JSONStream( child.stdout, child.stdin );
+	// if tty option is checked do not pass stdin (to avoid it popping up in the log)
+	if (job.params.tty) { var cstream = new JSONStream(child.stdout); }
+	else { var cstream = new JSONStream(child.stdout, child.stdin); }
+
 	cstream.recordRegExp = /^\s*\{.+\}\s*$/;
 	
 	cstream.on('json', function(data) {

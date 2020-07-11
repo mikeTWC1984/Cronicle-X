@@ -138,10 +138,11 @@ var storage = new StandaloneStorage(config.Storage, function(err) {
 			var setup = require('../conf/setup.json');
 			
 			// make sure this is only run once
+			// changing exit code to 0, so it won't break docker entry point
 			storage.get( 'global/users', function(err) {
 				if (!err) {
 					print( "Storage has already been set up.  There is no need to run this command again.\n\n" );
-					process.exit(1);
+					process.exit(0);
 				}
 				
 				async.eachSeries( setup.storage,
