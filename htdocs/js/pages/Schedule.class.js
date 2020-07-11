@@ -1579,6 +1579,41 @@ Class.subclass( Page.Base, "Page.Schedule", {
 							var ta_height = parseInt(param.rows) * 15;
 							html += '<div class="plugin_params_label">' + param.title + '</div>';
 							html += '<div class="plugin_params_content"><textarea id="fe_ee_pp_'+param.id+'" style="width:99%; height:'+ta_height+'px; resize:vertical;" spellcheck="false" onkeydown="return catchTab(this,event)">'+escape_text_field_value(value)+'</textarea></div>';
+							
+							// adding code eitor for script area
+							if(param.id == "script") { html += `
+							<script>
+							var editor = CodeMirror.fromTextArea(document.getElementById("fe_ee_pp_script"), {
+							  mode: "${params.lang}",
+							  styleActiveLine: true,
+							  lineWrapping: false,
+							  scrollbarStyle: "overlay",
+							  lineNumbers: true,
+							  theme: "${params.theme}",
+							  matchBrackets: true							  
+							});
+
+							// sync editor with original text area						
+							editor.on('change', function(cm){
+								console.log(cm.getValue());
+								document.getElementById("fe_ee_pp_script").value = cm.getValue();
+						     });
+
+							document.getElementById("fe_ee_pp_lang").addEventListener("change", function(){
+								var ln = this.options[this.selectedIndex].value;
+								editor.setOption("mode", ln);
+								console.log(ln);
+							});
+
+							document.getElementById("fe_ee_pp_theme").addEventListener("change", function(){
+								var thm = this.options[this.selectedIndex].value;
+								editor.setOption("theme", thm);
+								console.log(thm);
+							});
+
+							</script>
+							`}
+							
 						break;
 						
 						case 'checkbox':
