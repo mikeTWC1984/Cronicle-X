@@ -22,9 +22,16 @@ stream.on('json', function(job) {
 	var script_file = path.join( os.tmpdir(), 'cronicle-script-temp-' + job.id + '.sh' );
 	fs.writeFileSync( script_file, job.params.script, { mode: "775" } );
 	
-	var child = cp.spawn( script_file, [], { 
-		stdio: ['pipe', 'pipe', 'pipe'] 
-	} );
+	if (job.params.tty) { // execute thru script tool
+		var child = cp.spawn("/usr/bin/script", ["-qec", script_file, "--flush"], {
+			stdio: ['pipe', 'pipe', 'pipe']
+		});
+	}
+	else {
+		var child = cp.spawn(script_file, [], {
+			stdio: ['pipe', 'pipe', 'pipe']
+		});
+	}
 	
 	var kill_timer = null;
 	var stderr_buffer = '';
