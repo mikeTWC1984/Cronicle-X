@@ -376,10 +376,11 @@ Class.subclass(Page.Base, "Page.JobDetails", {
 
 		// job log (IFRAME)
 		html += '<div class="subtitle" style="margin-top:15px;">';
-		html += 'Job Event Log';
-		if (job.log_file_size) html += ' (' + get_text_from_bytes(job.log_file_size, 1) + ')';
+		html += 'Console Output';
+		var logSize = ""
+		if (job.log_file_size) logSize += ' (' + get_text_from_bytes(job.log_file_size, 1) + ')';
 		html += '<div class="subtitle_widget" style="margin-left:2px;"><a href="/api/app/get_job_log?id=' + job.id + '" target="_blank"><i class="fa fa-external-link">&nbsp;</i><b>View Full Log</b></a></div>';
-		html += '<div class="subtitle_widget"><a href="/api/app/get_job_log?id=' + job.id + '&download=1"><i class="fa fa-download">&nbsp;</i><b>Download Log</b></a></div>';
+		html += '<div class="subtitle_widget"><a href="/api/app/get_job_log?id=' + job.id + '&download=1"><i class="fa fa-download">&nbsp;</i><b>Download Log ' + logSize + '</b></a></div>';
 		html += '<div class="clear"></div>';
 		html += '</div>';
 
