@@ -84,7 +84,7 @@ Class.subclass(Page.Base, "Page.JobDetails", {
 		// render banner based on job result
 		var icon = '';
 		var type = '';
-		if (job.abort_reason || job.unknown) {
+		if (job.abort_reason || job.unknown || job.code == 255) {
 			type = 'warning';
 			icon = 'exclamation-circle';
 		}
@@ -110,6 +110,7 @@ Class.subclass(Page.Base, "Page.JobDetails", {
 			var desc = job.description;
 			job.description = "Error";
 			if (job.code != 1) job.description += " " + job.code;
+			if (job.code == 255) {job.description = "Warning"};
 			job.description += ": " + desc;
 		}
 
