@@ -1,5 +1,15 @@
 This is a fork of jhuckaby/Cronicle, which adds some more UI features to original project. 
 
+## install
+```bash
+git clone https://github.com/mikeTWC1984/Cronicle-X; cd Cronicle-X
+npm install; node bin/build.js dist
+# configure config.json now if needed
+bin/control.sh setup; bin/control.sh start
+```
+you can install it in any folder if needed (not only /opt/cronicle). To uninstall: ```rm -rf Cronicle-X```
+
+
 # New Features
 
 ## shell plugin - code editor
