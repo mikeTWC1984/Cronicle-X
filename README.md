@@ -6,6 +6,8 @@ git clone https://github.com/mikeTWC1984/Cronicle-X; cd Cronicle-X
 npm install; node bin/build.js dist
 # configure config.json now if needed
 bin/control.sh setup; bin/control.sh start
+# optional - create symlink for control.sh
+ln -s $PWD/bin/control.sh /usr/bin/cronx
 ```
 you can install it in any folder if needed (not only /opt/cronicle). To uninstall: ```rm -rf Cronicle-X```
 
@@ -34,6 +36,7 @@ exit -1
 ## Minor updates:
 - **edit** button added on completed job detail page (for easy back and forth navigation)
 - control.sh setup returns 0 exit code (no error) if setup already completed (useful for docker entrypoints)
+- control.sh - works properly as symlink (thanks to https://github.com/jhuckaby/Cronicle/pull/153 )
 - if using Gitlab's webhooks to trigger job - api key can be used as secret 
 - aws-sdk added to dependencies ( for s3 support)
 
