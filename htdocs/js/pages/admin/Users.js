@@ -310,6 +310,9 @@ Class.add(Page.Admin, {
 
 		setTimeout(function () {
 			$('#fe_eu_username').attr('disabled', true);
+			$('#fe_eu_extauth').attr('disabled', true);
+			$P().setExternalAuth();
+
 
 			if (app.config.external_users) {
 				app.showMessage('warning', "Users are managed by an external system, so making changes here may have little effect.");
@@ -414,15 +417,15 @@ Class.add(Page.Admin, {
 		html += get_form_table_caption("This can be used to recover the password if the user forgets.  It will not be shared with anyone outside the server.");
 		html += get_form_table_spacer();
 
-		// password
+		// password with ext_auth checkbox
 
-		pwdDisabledIfExtAuth = user.ext_auth ? "disabled" : ' ';
-		userExtAuthChecked = user.ext_auth ? 'checked="checked"' : ' '
+		var pwdDisabledIfExtAuth = user.ext_auth ? "disabled" : ' ';
+		var userExtAuthChecked = user.ext_auth ? 'checked="checked"' : ' '
 
 		html += get_form_table_row(user.password ? 'Change Password' : 'Password', `<input type="text" id="fe_eu_password" size="20" value="" spellcheck="false" ${pwdDisabledIfExtAuth}/>&nbsp;<span class="link addme" id="generate_pwd" onMouseUp="$P().generate_password()">&laquo; Generate Random</span>`);
 		html += get_form_table_caption(user.password ? "Optionally enter a new password here to reset it.  Please make it secure." : "Enter a password for the account.  Please make it secure.");
-		html += get_form_table_row('', `<input type="checkbox" ${userExtAuthChecked} id="fe_eu_extauth" onclick="$P().setExternalAuth()"/>`);
-		html += get_form_table_caption("use external authentifiction");
+		html += get_form_table_row('', `<input type="checkbox" ${userExtAuthChecked} id="fe_eu_extauth" onclick="$P().setExternalAuth()" />`);
+		html += get_form_table_caption("use external authentifiction (it cannot be changed once user is created)");
 		html += get_form_table_spacer();
 
 		// privilege list
