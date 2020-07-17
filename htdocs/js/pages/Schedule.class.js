@@ -1595,20 +1595,20 @@ Class.subclass( Page.Base, "Page.Schedule", {
 
 							// sync editor with original text area						
 							editor.on('change', function(cm){
-								console.log(cm.getValue());
+								//console.log(cm.getValue());
 								document.getElementById("fe_ee_pp_script").value = cm.getValue();
 						     });
 
 							document.getElementById("fe_ee_pp_lang").addEventListener("change", function(){
 								var ln = this.options[this.selectedIndex].value;
 								editor.setOption("mode", ln);
-								console.log(ln);
+								//console.log(ln);
 							});
 
 							document.getElementById("fe_ee_pp_theme").addEventListener("change", function(){
 								var thm = this.options[this.selectedIndex].value;
 								editor.setOption("theme", thm);
-								console.log(thm);
+								//console.log(thm);
 							});
 
 							</script>

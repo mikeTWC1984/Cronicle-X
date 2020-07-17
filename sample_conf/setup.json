@@ -148,6 +148,7 @@
 			},
 			[ "copyDir", "sample_conf", "conf", true ],
 			[ "copyFile", "htdocs/index-dev.html", "htdocs/index.html" ],
+			[ "copyFile", "plugins/user.ad.js", "node_modules/pixl-server-user/user.js" ],
 			[ "copyDir", "node_modules/codemirror", "htdocs/codemirror", true ],
 			{
 				"action": "bundleCompress",
