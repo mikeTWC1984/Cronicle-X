@@ -64,7 +64,7 @@ module.exports = Class.create({
 		this.usernameBlock = new RegExp(this.config.get('block_username_match'), "i");
 
 		// active directory. Try/Catch is used to avoid deamon crash if AD module is not installed
-		this.ad_principal = this.server.config.get('ad_domain') || 'corp.cronical.com';
+		this.ad_domain = this.server.config.get('ad_domain') || 'corp.cronical.com';
 		try {
 			var ActiveDirectory = require('activedirectory2');
 			this.ad = new ActiveDirectory({ url: ('ldap://' + this.ad_principal) });
@@ -202,11 +202,31 @@ module.exports = Class.create({
 					return self.doError('login', self.ad_error, callback)
 				}
 
-				var adUser = params.username + '@' + self.ad_principal;
+				var adUser = params.username + '@' + self.ad_domain;
 
 				self.ad.authenticate(adUser, params.password, function (err, auth) {
 					if (err || !auth) {
-						return self.doError('login', "Username or password incorrect (AD).", callback);
+						// incorrect password
+						// (throttle this to prevent abuse)
+						var date_code = Math.floor(Tools.timeNow() / 3600);
+						if (date_code != user.fl_date_code) {
+							user.fl_date_code = date_code;
+							user.fl_count = 1;
+						}
+						else {
+							user.fl_count++;
+							if (user.fl_count > self.config.get('max_failed_logins_per_hour')) {
+								// lockout until password reset
+								self.logDebug(3, "Locking account due to too many failed login attempts: " + params.username);
+								user.force_password_reset = 1;
+							}
+						}
+
+						// save user to update counters
+						self.storage.put('users/' + self.normalizeUsername(params.username), user, function (err, data) {
+							return self.doError('login', "Username or password incorrect (AD).", callback); // deliberately vague
+						});
+
 					}
 
 
@@ -287,7 +307,6 @@ module.exports = Class.create({
 						return self.doError('login', "Username or password incorrect.", callback); // deliberately vague
 					});
 
-					return;
 				}
 
 
