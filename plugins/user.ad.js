@@ -64,7 +64,7 @@ module.exports = Class.create({
 		this.usernameBlock = new RegExp(this.config.get('block_username_match'), "i");
 
 		// active directory. Try/Catch is used to avoid deamon crash if AD module is not installed
-		this.ad_principal = this.server.config.get('ad_principal') || 'corp.mycompany.com';
+		this.ad_principal = this.server.config.get('ad_domain') || 'corp.cronical.com';
 		try {
 			var ActiveDirectory = require('activedirectory2');
 			this.ad = new ActiveDirectory({ url: ('ldap://' + this.ad_principal) });

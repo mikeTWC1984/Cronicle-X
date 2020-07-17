@@ -4,6 +4,7 @@
 	"smtp_hostname": "localhost",
 	"smtp_port": 25,
 	"secret_key": "CHANGE_ME",
+	"ad_domain": "corp.cronicle.com",
 	
 	"log_dir": "logs",
 	"log_filename": "[component].log",
