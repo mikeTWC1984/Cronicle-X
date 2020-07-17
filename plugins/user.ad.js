@@ -67,7 +67,7 @@ module.exports = Class.create({
 		this.ad_domain = this.server.config.get('ad_domain') || 'corp.cronical.com';
 		try {
 			var ActiveDirectory = require('activedirectory2');
-			this.ad = new ActiveDirectory({ url: ('ldap://' + this.ad_principal) });
+			this.ad = new ActiveDirectory({ url: ('ldap://' + this.ad_domain) });
 		}
 		catch (err) {
 			this.ad_error = err.code;
