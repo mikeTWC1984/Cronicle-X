@@ -33,6 +33,22 @@ exit -1
 ```
 ![image](https://user-images.githubusercontent.com/31977106/87238751-90520980-c3d4-11ea-9b49-d0d1abbb2d85.png)
 
+## Active Directory / External authentication
+You can let user to use alternative authentication (username/password verification) mechanism. While creating a user check **external authentication** check box.
+![image](https://user-images.githubusercontent.com/31977106/87841063-afd3b100-c870-11ea-8e73-2c5274bc3e4e.png)
+If that option is set user's password/username check will be routed to external mechanism (standard mechanism compares password hashes) and all password updated option will be locked. All other steps (user status check/incorrect password handling/session generation) are the same for both methods
+The default external mechanism is Active Directory. In order to enable it:
+1.   install activedirectory2 module: ```npm install activedirectory2```
+2.   in config.json specify ad_domain setting (a.k.a. kerberos realm)
+   if not sure what it is try to ping localhost (you'll likely see domain name added to your hostname), or in powershell run this ```[adsi]""```, then you if you get something like ``` {DC=CORP,DC=MYCOMPANY,DC=com}``` the domain name will be corp.mycompany.com (assuming you do it from a windows machine that s logged to your domain)
+3. create a new user with external auth box checked. Now that user should be able to login using his ad credentials.
+
+To set up a custom authentication (e.g. http post request) 
+- open this file: **_node_modules/pixl-server-user/user.js_**  (or  **_plugins/user.ad.js_** before installing cronicle)
+- locate **startup** function and require any extra modules you need (e.g. request)
+- then locate **api_login** function and replace **ad.authenticate** method with your custom one (e.g. request.post )
+
+
 ## Minor updates:
 - **edit** button added on completed job detail page (for easy back and forth navigation)
 - control.sh setup returns 0 exit code (no error) if setup already completed (useful for docker entrypoints)
