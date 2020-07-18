@@ -34,8 +34,10 @@ exit -1
 ![image](https://user-images.githubusercontent.com/31977106/87238751-90520980-c3d4-11ea-9b49-d0d1abbb2d85.png)
 
 ## Active Directory / External authentication
-You can let user to use alternative authentication (username/password verification) mechanism. While creating a user check **external authentication** check box.
+You can let user to use alternative authentication (username/password verification) mechanism. While creating a user check **external authentication** check box:
+
 ![image](https://user-images.githubusercontent.com/31977106/87841063-afd3b100-c870-11ea-8e73-2c5274bc3e4e.png)
+
 If that option is set user's password/username check will be routed to external mechanism (standard mechanism compares password hashes) and all password updated option will be locked. All other steps (user status check/incorrect password handling/session generation) are the same for both methods
 The default external mechanism is Active Directory. In order to enable it:
 1.   install activedirectory2 module: ```npm install activedirectory2```
