@@ -5,7 +5,7 @@
 	"smtp_port": 25,
 	"secret_key": "CHANGE_ME",
 	"ad_domain": "corp.cronicle.com",
-	
+		
 	"log_dir": "logs",
 	"log_filename": "[component].log",
 	"log_columns": ["hires_epoch", "date", "hostname", "pid", "component", "category", "code", "msg", "data"],
