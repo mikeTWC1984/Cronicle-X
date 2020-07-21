@@ -31,7 +31,6 @@
 		"font-awesome": "4.7.0",
 		"glob": "5.0.15",
 		"jquery": "3.3.1",
-		"jquery-ui": "^1.12.1",
 		"jstimezonedetect": "1.0.6",
 		"mdi": "1.9.33",
 		"mkdirp": "0.5.1",
