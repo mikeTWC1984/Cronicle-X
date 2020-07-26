@@ -43,7 +43,8 @@ Class.subclass( Page.Base, "Page.History", {
 			var sorted_events = app.schedule.sort( function(a, b) {
 				return a.title.toLowerCase().localeCompare( b.title.toLowerCase() );
 			} );
-			html += '<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_hist_event" class="subtitle_menu" onChange="$P().jump_to_event_history()"><option value="">Filter by Event</option>' + render_menu_options( sorted_events, '', false ) + '</select></div>';
+			html += `<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_hist_eventlimit" class="subtitle_menu" onChange="$('#d_history_table').empty();$P().get_history()"  title="Only keep last N occurences of each job on this page"><option value="">Max rows per event</option><option>1</option><option>3</option><option>5</option><option>10</option></select></div>`;
+			html += `<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_hist_event" class="subtitle_menu" onChange="$P().jump_to_event_history()"><option value="">Filter by Event</option>${render_menu_options(sorted_events, "", false)}</select></div>";`
 			html += '<div class="clear"></div>';
 		html += '</div>';
 		
@@ -57,7 +58,7 @@ Class.subclass( Page.Base, "Page.History", {
 	get_history: function() {
 		var args = this.args;
 		if (!args.offset) args.offset = 0;
-		if (!args.limit) args.limit = 25;
+		if (!args.limit) args.limit = 40;
 		app.api.post( 'app/get_history', copy_object(args), this.receive_history.bind(this) );
 	},
 	
@@ -73,6 +74,20 @@ Class.subclass( Page.Base, "Page.History", {
 		
 		this.events = [];
 		if (resp.rows) this.events = resp.rows;
+
+		// show only last N occurences of each job if set by fe_hist_eventlimit
+		var rowLimitDict = {};
+		var rowLimit = $("#fe_hist_eventlimit").val();
+		if (rowLimit > 0) {
+			var newRows = []
+			for (var idx = 0, len = resp.rows.length; idx < len; idx++) {
+				var row = resp.rows[idx];
+				rowLimitDict[row.event] = rowLimitDict[row.event] ? rowLimitDict[row.event] + 1 : 1;
+				if (rowLimitDict[row.event] > rowLimit) {continue;}
+				newRows.push(row)
+			}
+			resp.rows = newRows
+		} //
 		
 		var cols = ['Job ID', 'Event Name', 'Category', 'Plugin', 'Hostname', 'Result', 'Start Date/Time', 'Elapsed Time'];
 		
@@ -666,7 +681,7 @@ Class.subclass( Page.Base, "Page.History", {
 	gosub_event_history: function(args) {
 		// show table of all history for a single event
 		if (!args.offset) args.offset = 0;
-		if (!args.limit) args.limit = 25;
+		if (!args.limit) args.limit = 40;
 		app.api.post( 'app/get_event_history', copy_object(args), this.receive_event_history.bind(this) );
 	},
 	
