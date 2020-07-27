@@ -985,11 +985,11 @@ Class.subclass(Page.Base, "Page.Schedule", {
 		if (event.id) {
 			html += get_form_table_row('Debug', `
 				
-				  <input type="checkbox" id="fe_ee_debug_chain" class="debug_options" value="1"><label> omit chaining</label><br>
-				  <input type="checkbox" id="fe_ee_debug_email" class="debug_options"  value="1"><label> omit email </label><br>
-				  <input type="checkbox" id="fe_ee_debug_webhook" class="debug_options" value="1"><label> omit webhook</label><br>
-				  <input type="checkbox" id="fe_ee_debug_history" class="debug_options"  value="1"><label> hide from history</label><br>
-				  <input type="checkbox" id="fe_ee_debug_all" value="1"><label> check all</label><br>
+				  <input type="checkbox" id="fe_ee_debug_chain" class="debug_options" value="1"><label> Omit Chaining</label><br>
+				  <input type="checkbox" id="fe_ee_debug_email" class="debug_options"  value="1"><label> Omit Email </label><br>
+				  <input type="checkbox" id="fe_ee_debug_webhook" class="debug_options" value="1"><label> Omit Webhook</label><br>
+				  <input type="checkbox" id="fe_ee_debug_history" class="debug_options"  value="1"><label> Hide From History</label><br>
+				  <input type="checkbox" id="fe_ee_debug_all" value="1"><label> Check All</label><br>
 				  <script>
 				  $( '#fe_ee_debug_all' ).click( function () {
 					$( '.debug_options' ).prop('checked', this.checked)
