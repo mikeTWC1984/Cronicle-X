@@ -105,7 +105,7 @@
                     { "title": "category", "data": "category_title", render: data => `<i class="fa fa-folder-open-o"> </i> <span> ${data}</span>` },
                     {
                         "data": "code", "title": "status", "render": function (data, type, row) {
-                            let errorTitle = job.description ? job.description.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "") : " " 
+                            let errorTitle = row.description ? row.description.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "") : " " 
                             if (row.action == "job_complete_debug") { return `<span class="btn-sm btn-info"><b>Debug</b></span>` }
                             if (row.code == 255) { return `<span class="btn-sm btn-warning" title="${errorTitle}"><b>Warning</b></span>` }
                             if (row.code == 130) { return `<span class="btn-sm btn-danger" title="${errorTitle}"><b>Aborted</b></span>` }
