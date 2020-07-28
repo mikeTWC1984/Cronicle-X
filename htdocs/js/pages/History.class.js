@@ -45,7 +45,7 @@ Class.subclass( Page.Base, "Page.History", {
 			} );
 			html += `<div class="subtitle_widget"><a href="/dashboard.html" target="_blank"><b>Event Dashboard</b></a></div>`
 			html += `<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_hist_eventlimit" class="subtitle_menu" onChange="$('#d_history_table').empty();$P().get_history()"  title="Only keep last N occurences of each job on this page"><option value="">Max rows per event</option><option>1</option><option>3</option><option>5</option><option>10</option></select></div>`;
-			html += `<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_hist_event" class="subtitle_menu" onChange="$P().jump_to_event_history()"><option value="">Filter by Event</option>${render_menu_options(sorted_events, "", false)}</select></div>";`
+			html += `<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_hist_event" class="subtitle_menu" onChange="$P().jump_to_event_history()"><option value="">Filter by Event</option>${render_menu_options(sorted_events, "", false)}</select></div>`
 			html += '<div class="clear"></div>';
 		html += '</div>';
 		

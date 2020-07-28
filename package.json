@@ -22,6 +22,7 @@
 		"scheduler"
 	],
 	"dependencies": {
+		"activedirectory2": "^2.0.0",
 		"ansi_up": "^4.0.4",
 		"async": "2.6.0",
 		"aws-sdk": "^2.712.0",

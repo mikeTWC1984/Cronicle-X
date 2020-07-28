@@ -105,9 +105,11 @@
                     { "title": "category", "data": "category_title", render: data => `<i class="fa fa-folder-open-o"> </i> <span> ${data}</span>` },
                     {
                         "data": "code", "title": "status", "render": function (data, type, row) {
-                            if (row.action == "job_complete_debug") { return '<span class="btn-sm btn-info"><b>Debug</b></span>' }
-                            if (row.code == 255) { return '<span class="btn-sm btn-warning"><b>Warning</b></span>' }
-                            if (row.code > 0) { return `<span class="tooltip-1 btn-sm btn-danger"  title="${row.description}"><b class="tooltip-1">Error</b></span>` }
+                            let errorTitle = job.description ? job.description.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "") : " " 
+                            if (row.action == "job_complete_debug") { return `<span class="btn-sm btn-info"><b>Debug</b></span>` }
+                            if (row.code == 255) { return `<span class="btn-sm btn-warning" title="${errorTitle}"><b>Warning</b></span>` }
+                            if (row.code == 130) { return `<span class="btn-sm btn-danger" title="${errorTitle}"><b>Aborted</b></span>` }
+                            if (row.code > 0) { return `<span class="tooltip-1 btn-sm btn-danger"  title="${errorTitle}"><b class="tooltip-1">Error</b></span>` }
                             return '<span class="btn-sm btn-success"><b>Success</b></span>'
                         }
                     },
