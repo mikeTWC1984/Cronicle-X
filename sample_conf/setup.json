@@ -46,7 +46,7 @@
 				{ "id":"json", "type":"checkbox", "title":"Interpret JSON in Output", "value": 0 },
 				{"type":"select","id":"lang","title":"syntax","items":["shell","powershell","javascript","python","perl","groovy"],"value":"shell"},
 				{"type":"select","id":"theme","title":"theme","items":["default","gruvbox-dark","solarized light","solarized dark","darcula"],"value":"default"},
-				{"type":"checkbox","id":"tty","title":"use terminal emulator (script tool is required)","value":0}
+				{"type":"checkbox","id":"tty","title":"use terminal emulator","value":0}
 			]
 		} ],
 		[ "listPush", "global/plugins", {
