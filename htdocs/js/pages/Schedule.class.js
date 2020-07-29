@@ -1416,7 +1416,7 @@ Class.subclass(Page.Base, "Page.Schedule", {
 		html += '<div class="info_value" id="d_ee_timing_summary">' + summarize_event_timing(timing, event.timezone).replace(/(every\s+minute)/i, '<span style="color:red">$1</span>');
 		// add event webhook info if "On demand" is selected
 		let apiUrl = '/api/app/run_event?id=' + event.id + '&post_data=1&api_key=API_KEY'    
-        let webhookInfo = !timing ? '<br><span title="API_KEY with run_event privelege should be created by admin user. If using Gitlab - api_key can be also set via SECRET parameter"> Webhook Url:<span><br>' + window.location.origin + apiUrl : ' ' 
+        let webhookInfo = !timing ? '<br><span title="Use this Url to trigger event via webhook. API_KEY with "Run Events" privelege should be created by admin user. If using Gitlab webhook - api_key can be also set via SECRET parameter"> <br>[webhook] </span>' + window.location.origin + apiUrl : ' ' 
 		html += webhookInfo + '</div>';
 
 		html += '</fieldset>';
@@ -1642,7 +1642,7 @@ Class.subclass(Page.Base, "Page.Schedule", {
 								//console.log(thm);
 							});
 
-							document.getElementById('fe_ee_pp_tty').title = "This option will let you capture colorized terminal output using /usr/bin/script tool (typically in the box, on alpine install util-linux). Please note - it will supress stdin/stderr (only forwards exit code) sent to/from actual script. It will also hang on interactive prompts. To be safe use it for debugging only. "
+							document.getElementById('fe_ee_pp_tty').title = "This option let you capture colorized terminal output using /usr/bin/script tool (typically in the box, on alpine install util-linux). Please note - it will supress stdin/stderr (only forwards exit code) sent to/from actual script. It will also hang on interactive prompts. To be safe use it for debugging only. "
 
 							</script>
 							`}
