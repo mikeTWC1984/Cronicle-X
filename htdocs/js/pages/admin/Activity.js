@@ -29,6 +29,8 @@ Class.add( Page.Admin, {
 	receive_activity: function(resp) {
 		// receive page of activity from server, render it
 		this.lastActivityResp = resp;
+
+		if(resp.rows) {resp.rows = resp.rows.filter(item => item.action != 'job_complete_debug') }
 		
 		var html = '';
 		this.div.removeClass('loading');
@@ -194,7 +196,7 @@ Class.add( Page.Admin, {
 						desc = 'Job <b>#'+item.id+'</b> ('+event.title+') on server <b>'+item.hostname.replace(/\.[\w\-]+\.\w+$/, '')+'</b> completed successfully';
 					}
 					else {
-						desc = 'Job <b>#'+item.id+'</b> ('+event.title+') on server <b>'+item.hostname.replace(/\.[\w\-]+\.\w+$/, '')+'</b> failed with error: ' + encode_entities(item.description || 'Unknown Error');
+						desc = 'Job <b>#'+item.id+'</b> ('+event.title+') on server <b>'+item.hostname.replace(/\.[\w\-]+\.\w+$/, '')+'</b> failed with error: ' + encode_entities(item.description || 'Unknown Error').replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "");
 						if (desc.match(/\n/)) desc = desc.split(/\n/).shift() + "...";
 						color = 'red';
 					}
