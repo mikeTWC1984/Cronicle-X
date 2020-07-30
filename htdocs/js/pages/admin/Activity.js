@@ -29,8 +29,8 @@ Class.add( Page.Admin, {
 	receive_activity: function(resp) {
 		// receive page of activity from server, render it
 		this.lastActivityResp = resp;
-
-		if(resp.rows) {resp.rows = resp.rows.filter(item => item.action != 'job_complete_debug') }
+        // hide warnings and debug runs
+		if(resp.rows) {resp.rows = resp.rows.filter(item => item.action != 'job_complete_debug' && item.code != 255) }
 		
 		var html = '';
 		this.div.removeClass('loading');
