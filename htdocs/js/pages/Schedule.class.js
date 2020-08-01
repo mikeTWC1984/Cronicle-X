@@ -1415,8 +1415,8 @@ Class.subclass(Page.Base, "Page.Schedule", {
 		html += '<div class="info_label">The event will run:</div>';
 		html += '<div class="info_value" id="d_ee_timing_summary">' + summarize_event_timing(timing, event.timezone).replace(/(every\s+minute)/i, '<span style="color:red">$1</span>');
 		// add event webhook info if "On demand" is selected
-		let apiUrl = '/api/app/run_event?id=' + (event.id || 'eventId') + '&post_data=1&api_key=API_KEY'    
-        let webhookInfo = !timing ? '<br><span title="Use this Url to trigger event via webhook. API_KEY with [Run Events] privelege should be created by admin user. If using Gitlab webhook - api_key can be also set via SECRET parameter"> <br>[webhook] </span>' + window.location.origin + apiUrl : ' ' 
+		let apiUrl = '/api/app/run_event?id=' + (event.id || 'eventId') + '&post_data=1&api_key=API_KEY'
+		let webhookInfo = !timing ? '<br><span title="Use this Url to trigger event via webhook. API_KEY with [Run Events] privelege should be created by admin user. If using Gitlab webhook - api_key can be also set via SECRET parameter"> <br>[webhook] </span>' + window.location.origin + apiUrl : ' '
 		html += webhookInfo + '</div>';
 
 		html += '</fieldset>';
@@ -1612,15 +1612,17 @@ Class.subclass(Page.Base, "Page.Schedule", {
 
 							// adding code eitor for script area
 							if (param.id == "script") {
+								var lang = params.lang || params.default_lang || 'shell';
+								var theme = params.theme || 'default';
 								html += `
 							<script>
 							var editor = CodeMirror.fromTextArea(document.getElementById("fe_ee_pp_script"), {
-							  mode: "${params.lang}",
+							  mode: "${lang}",
 							  styleActiveLine: true,
 							  lineWrapping: false,
 							  scrollbarStyle: "overlay",
 							  lineNumbers: true,
-							  theme: "${params.theme}",
+							  theme: "${theme}",
 							  matchBrackets: true							  
 							});
 
@@ -1630,19 +1632,6 @@ Class.subclass(Page.Base, "Page.Schedule", {
 								document.getElementById("fe_ee_pp_script").value = cm.getValue();
 						     });
 
-							document.getElementById("fe_ee_pp_lang").addEventListener("change", function(){
-								var ln = this.options[this.selectedIndex].value;
-								editor.setOption("mode", ln);
-								//console.log(ln);
-							});
-
-							document.getElementById("fe_ee_pp_theme").addEventListener("change", function(){
-								var thm = this.options[this.selectedIndex].value;
-								editor.setOption("theme", thm);
-								//console.log(thm);
-							});
-
-							document.getElementById('fe_ee_pp_tty').title = "This option let you capture colorized terminal output using /usr/bin/script tool (typically in the box, on alpine install util-linux). Please note - it will supress stdin/stderr sent to/from actual process, so you won't be able to catch input parameters (from stdin) or error message (although you'll receive proper exit code). It will also hang on interactive prompts. To be safe use it for debugging only. "
 
 							</script>
 							`}
@@ -1651,11 +1640,41 @@ Class.subclass(Page.Base, "Page.Schedule", {
 
 						case 'checkbox':
 							html += '<div class="plugin_params_content"><input type="checkbox" id="fe_ee_pp_' + param.id + '" value="1" ' + (value ? 'checked="checked"' : '') + '/><label for="fe_ee_pp_' + param.id + '">' + param.title + '</label></div>';
+							if (param.id == 'tty') {
+								//console.log(event)
+								html += `<script>
+								 document.getElementById('fe_ee_pp_tty').title = "This option let you capture colorized terminal output using /usr/bin/script tool (typically in the box, on alpine install util-linux). Please note - it will supress stdin/stderr sent to/from actual process, so you won't be able to catch input parameters (from stdin) or error message (although you'll receive proper exit code). It will also hang on interactive prompts. To be safe use it for debugging only."
+								 </script>
+								 `
+							}
 							break;
 
 						case 'select':
 							html += '<div class="plugin_params_label">' + param.title + '</div>';
 							html += '<div class="plugin_params_content"><select id="fe_ee_pp_' + param.id + '">' + render_menu_options(param.items, value, true) + '</select></div>';
+							if(param.id == 'lang') {
+								html+=`
+								<script>
+								document.getElementById("fe_ee_pp_lang").addEventListener("change", function(){
+									var ln = this.options[this.selectedIndex].value;
+									if(ln == 'java') {ln = 'text/x-java'}
+									editor.setOption("mode", ln);
+									//console.log(ln);
+								});
+								</script>
+							  `
+							}
+							if(param.id == 'theme') {
+								html += `
+								<script>
+								document.getElementById("fe_ee_pp_theme").addEventListener("change", function(){
+									var thm = this.options[this.selectedIndex].value;
+									editor.setOption("theme", thm);
+									//console.log(thm);
+								});
+								</script>
+								`
+							}
 							break;
 
 						case 'hidden':
