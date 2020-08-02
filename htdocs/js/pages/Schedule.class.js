@@ -1610,6 +1610,9 @@ Class.subclass(Page.Base, "Page.Schedule", {
 							if(param.id == 'java_home') {
 								html += '<script>document.getElementById("fe_ee_pp_java_home").title="[optional] Specify custom JAVA_HOME location to resolve java/javac executables (typically located in JAVA_HOME/bin). This is useful if you only have binaries or multiple java versions. By default it will be resolved from the environment."</script>'
 							}
+							if(param.id == 'class_name') {
+								html += '<script>document.getElementById("fe_ee_pp_class_name").title="Specify which class to run. If not set event name will be used"</script>'
+							}
 							break;
 
 						case 'textarea':

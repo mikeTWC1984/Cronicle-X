@@ -58,7 +58,7 @@
 			"modified":1596302507,
 			"created":1596242530,
 			"params":[
-				{"type":"text","id":"className","title":"Class Name","size":20,"value":"MyClass"},
+				{"type":"text","id":"class_name","title":"Class Name","size":20,"value":"MyClass"},
 				{"type":"textarea","id":"script","title":"java code:","rows":20,"value":"// jars in bin/jars will be added to classpath\n\nclass MyClass {\n    public static void main(String[] args) {\n      \n       // your code here\n        System.out.println(\"Hello from MyClass\");\n   \n    }\n}"},
 				{"type":"select","id":"theme","title":"theme","items":["default","darcula"],"value":"default"},
 				{"type":"hidden","id":"default_lang","title":"def lang","value":"text/x-java"},
