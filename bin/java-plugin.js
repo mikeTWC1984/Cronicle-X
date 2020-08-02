@@ -19,14 +19,24 @@ process.stdout.setEncoding('utf8');
 
 var stream = new JSONStream( process.stdin, process.stdout );
 stream.on('json', function(job) {
-	// got job from parent 
+    // got job from parent 
+    
 	var className = job.params.className || job.title;
 	var tmpDir = fs.mkdtempSync(path.join(os.tmpdir(),job.id))
-	var classPath = path.join(__dirname, 'jars/*') + ':' + tmpDir;
+	var classPath = (job.params.classpath || path.join(__dirname, 'jars/*')) + ':' + tmpDir;
+	process.env['CLASSPATH'] = classPath;
 	var java_file =  path.join( tmpDir, className + '.java')
 	var script_file = path.join(tmpDir, 'run.sh' );
-	var script = `#!/bin/sh \n 	javac ${java_file} \n	java -cp ${classPath}  ${className}`
-	//console.log(script);
+	var java = "java"
+	var javac = "javac"
+	if(job.params.java_home) {
+		javac = path.join(job.params.java_home, 'bin', 'javac')
+		java = path.join(job.params.java_home, 'bin', 'java')
+	}
+	var script = `#!/bin/sh
+		 ${javac} ${java_file}
+		 ${java}  ${className}
+		`
 	fs.writeFileSync( java_file, job.params.script, { mode: "775" } );
 	fs.writeFileSync( script_file, script, { mode: "775" } );
 	

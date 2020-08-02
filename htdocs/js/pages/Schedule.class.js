@@ -1603,6 +1603,13 @@ Class.subclass(Page.Base, "Page.Schedule", {
 						case 'text':
 							html += '<div class="plugin_params_label">' + param.title + '</div>';
 							html += '<div class="plugin_params_content"><input type="text" id="fe_ee_pp_' + param.id + '" size="' + param.size + '" value="' + escape_text_field_value(value) + '" spellcheck="false"/></div>';
+							if(param.id == 'classpath') {
+								html += '<script>document.getElementById("fe_ee_pp_classpath").title="[optional] Specify jar file or folder to extend default classpath (use * wildcard for folders, e.g. /my/dir/*). By default you can use bin/jars directory to add extra jars to your script"</script>'
+								
+							}
+							if(param.id == 'java_home') {
+								html += '<script>document.getElementById("fe_ee_pp_java_home").title="[optional] Specify custom JAVA_HOME location to resolve java/javac executables (typically located in JAVA_HOME/bin). This is useful if you only have binaries or multiple java versions. By default it will be resolved from the environment."</script>'
+							}
 							break;
 
 						case 'textarea':
