@@ -21,7 +21,7 @@ var stream = new JSONStream( process.stdin, process.stdout );
 stream.on('json', function(job) {
     // got job from parent 
     
-	var className = job.params.className || job.title;
+	var className = job.params.class_name || job.event_title;
 	var tmpDir = fs.mkdtempSync(path.join(os.tmpdir(),job.id))
 	var classPath = (job.params.classpath || path.join(__dirname, 'jars/*')) + ':' + tmpDir;
 	process.env['CLASSPATH'] = classPath;
