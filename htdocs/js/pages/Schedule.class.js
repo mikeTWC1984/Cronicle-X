@@ -1604,14 +1604,13 @@ Class.subclass(Page.Base, "Page.Schedule", {
 							html += '<div class="plugin_params_label">' + param.title + '</div>';
 							html += '<div class="plugin_params_content"><input type="text" id="fe_ee_pp_' + param.id + '" size="' + param.size + '" value="' + escape_text_field_value(value) + '" spellcheck="false"/></div>';
 							if(param.id == 'classpath') {
-								html += '<script>document.getElementById("fe_ee_pp_classpath").title="[optional] Specify jar file or folder to extend default classpath (use * wildcard for folders, e.g. /my/dir/*). By default you can use bin/jars directory to add extra jars to your script"</script>'
-								
+								html += '<script>document.getElementById("fe_ee_pp_classpath").title="[optional] Specify jar file or folder to override default classpath (use * wildcard for folders, e.g. /my/dir/*). By default you can use bin/jars directory to add extra jars to your script"</script>'
 							}
 							if(param.id == 'java_home') {
 								html += '<script>document.getElementById("fe_ee_pp_java_home").title="[optional] Specify custom JAVA_HOME location to resolve java/javac executables (typically located in JAVA_HOME/bin). This is useful if you only have binaries or multiple java versions. By default it will be resolved from the environment."</script>'
 							}
 							if(param.id == 'class_name') {
-								html += '<script>document.getElementById("fe_ee_pp_class_name").title="Specify which class to run. If not set event name will be used"</script>'
+								html += '<script>document.getElementById("fe_ee_pp_class_name").title="[optional] Specify which class to run (useful if multiple classes are defined). By default plugin will detect and run first available class, so to be safe place your primary class at the top of the script"</script>'
 							}
 							break;
 

@@ -55,8 +55,12 @@ You can also hide test execution from event history/stats.
 ![image](https://user-images.githubusercontent.com/31977106/88609937-554a0a00-d053-11ea-871c-5cbaa4e3d670.png)
 
 ## Event Dashboard
-A custom implementation of Event History using DataTables.net, it pulls last 1000 jobs and adds some better filtering options. It's also a demo of custom UI complonent (independent from default framework). To open it - go to history page and click on **Event Dashboard** link
+A custom implementation of Event History using DataTables.net, it pulls last 1000 jobs and adds some extra filtering options. It's also a demo of custom UI component (independent from default framework). To open it - go to history page and click on **Event Dashboard** link
 ![image](https://user-images.githubusercontent.com/31977106/88610206-0ea8df80-d054-11ea-938c-29d7dcf74b8d.png)
+
+## Java plugin
+If open jdk is installed on your machine you can run java classes as scripts (plugin will take care of creating/compiling/removing temp files). You can also customize classpath and JAVA_HOME (custom java version) using plugin parameters. By default you can put dependency jars (e.g. jdbc drivers) in bin/jars folder.
+![image](https://user-images.githubusercontent.com/31977106/89139670-74daaa00-d50d-11ea-91d6-45572e162843.png)
 
 ## Minor updates:
 - **edit** button added on completed job detail page (for easy back and forth navigation)

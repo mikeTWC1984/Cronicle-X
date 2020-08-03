@@ -20,8 +20,10 @@ process.stdout.setEncoding('utf8');
 var stream = new JSONStream( process.stdin, process.stdout );
 stream.on('json', function(job) {
     // got job from parent 
-    
-	var className = job.params.class_name || job.event_title;
+	var commentRg = /\/\*[^]*?\*\/\s*/g ;
+	var classNameRg = /(?<=^\s*(?:public\s+)?class\s+)(\w+?)(?=[\s|{])/gm
+    // get class name from parameter, then autodetect from script then event name 
+	var className = job.params.class_name || (job.params.script.replace(commentRg, '').match(classNameRg) || [job.event_title])[0];
 	var tmpDir = fs.mkdtempSync(path.join(os.tmpdir(),job.id))
 	var classPath = (job.params.classpath || path.join(__dirname, 'jars/*')) + ':' + tmpDir;
 	process.env['CLASSPATH'] = classPath;
