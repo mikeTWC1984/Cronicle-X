@@ -55,7 +55,8 @@ You can also hide test execution from event history/stats.
 ![image](https://user-images.githubusercontent.com/31977106/88609937-554a0a00-d053-11ea-871c-5cbaa4e3d670.png)
 
 ## Event Dashboard
-A custom implementation of Event History using DataTables.net, it pulls last 1000 jobs and adds some extra filtering options. It's also a demo of custom UI component (independent from default framework). To open it - go to history page and click on **Event Dashboard** link
+A custom implementation of Event History using DataTables.net, it pulls last 1000 jobs and adds some extra filtering options. It's also a demo of custom UI component (independent from default framework). To open it - go to history page and click on **Event Dashboard**
+
 ![image](https://user-images.githubusercontent.com/31977106/88610206-0ea8df80-d054-11ea-938c-29d7dcf74b8d.png)
 
 ## Java plugin
