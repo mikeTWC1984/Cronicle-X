@@ -69,6 +69,7 @@ Class.subclass( Page.Base, "Page.Home", {
 		
 		html += '<div class="subtitle_widget"><i class="fa fa-search">&nbsp;</i><input type="text" id="fe_home_keywords" size="10" placeholder="Find events..." style="border:0px;" value="' + escape_text_field_value( args.keywords ) + '"/></div>';
 		
+		html += `<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_up_eventlimit" class="subtitle_menu" onChange="$P().nav_upcoming($P().upcoming_offset);"  title="Show only next N occurences per event"><option value="">Next occurences (all)</option><option>1</option><option>2</option><option>3</option><option>5</option></select></div>`;
 		html += '<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_home_target" class="subtitle_menu" style="width:75px;" onChange="$P().set_search_filters()"><option value="">All Servers</option>' + this.render_target_menu_options( args.target ) + '</select></div>';
 		html += '<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_home_plugin" class="subtitle_menu" style="width:75px;" onChange="$P().set_search_filters()"><option value="">All Plugins</option>' + render_menu_options( app.plugins, args.plugin, false ) + '</select></div>';
 		html += '<div class="subtitle_widget"><i class="fa fa-chevron-down">&nbsp;</i><select id="fe_home_cat" class="subtitle_menu" style="width:95px;" onChange="$P().set_search_filters()"><option value="">All Categories</option>' + render_menu_options( app.categories, args.category, false ) + '</select></div>';
@@ -220,6 +221,21 @@ Class.subclass( Page.Base, "Page.Home", {
 		var now = app.epoch || hires_time_now();
 		var args = this.args;
 		this.upcoming_events = e.data;
+		
+		// limit number of occurences (per event) on upcoming event table
+		var rowLimitDict = {};
+		var rowLimit = $("#fe_up_eventlimit").val();
+		if (rowLimit > 0) {
+			var newRows = []
+			for (var idx = 0, len = e.data.length; idx < len; idx++) {
+				var row = e.data[idx];
+				rowLimitDict[row.id] = rowLimitDict[row.id] ? rowLimitDict[row.id] + 1 : 1;
+				if (rowLimitDict[row.id] > rowLimit) {continue;}
+				//console.log(rowLimitDict)
+				newRows.push(row)
+			}
+			e.data = newRows
+		} //
 		
 		/*var elapsed = now - this.worker_start_time;
 		delete this.worker_start_time;
