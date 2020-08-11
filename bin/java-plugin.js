@@ -12,6 +12,7 @@ var path = require('path');
 var JSONStream = require('pixl-json-stream');
 var Tools = require('pixl-tools');
 var rimraf = require("rimraf");
+require('dotenv').config();
 
 // setup stdin / stdout streams 
 process.stdin.setEncoding('utf8');

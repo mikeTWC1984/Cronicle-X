@@ -11,6 +11,7 @@ var cp = require('child_process');
 var path = require('path');
 var JSONStream = require('pixl-json-stream');
 var Tools = require('pixl-tools');
+require('dotenv').config();
 
 // setup stdin / stdout streams 
 process.stdin.setEncoding('utf8');
