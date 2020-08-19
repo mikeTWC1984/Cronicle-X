@@ -33,6 +33,8 @@ exit -1
 ```
 ![image](https://user-images.githubusercontent.com/31977106/87238751-90520980-c3d4-11ea-9b49-d0d1abbb2d85.png)
 
+To indicate result (success/warning/error) on email template use [/status] property
+
 ## Active Directory / External authentication
 You can let user to use alternative authentication (username/password verification) mechanism. While creating a user check **external authentication** check box:
 
