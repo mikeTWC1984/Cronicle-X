@@ -1126,7 +1126,7 @@ Class.subclass(Page.Base, "Page.JobDetails", {
 
 			$cont.append(
 				'<pre class="log_chunk">' +
-				lines.map(function (line) { return line.replace(/</g, '&lt;'); }).join("\n").trim() +
+				lines.map(line => line.replace(/</g, '&lt;')).join("\n").replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, "").trim() +
 				'</pre>'
 			);
 
